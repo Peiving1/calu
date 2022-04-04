@@ -21,11 +21,10 @@ def button_clear():
 
 def button_add():
     num1 = e.get()
-    num1 = int(num1)
     global f_num
     global math
     math = "addition"
-    f_num = num1
+    f_num = float(num1)
     e.delete(0, END)
 
 def button_multiply():
@@ -33,7 +32,7 @@ def button_multiply():
     global f_num
     global math
     math = "multiply"
-    f_num = int(num1)
+    f_num = float(num1)
     e.delete(0, END)
 
 def button_divide():
@@ -41,7 +40,7 @@ def button_divide():
     global f_num
     global math
     math = "divide"
-    f_num = int(num1)
+    f_num = float(num1)
     e.delete(0, END)
 
 def button_subtract():
@@ -49,30 +48,58 @@ def button_subtract():
         global f_num
         global math
         math = "subtract"
-        f_num = int(num1)
+        f_num = float(num1)
         e.delete(0, END)
 
 def button_equal():
     num2 = e.get()
     e.delete(0, END)
-    # e.insert(0, f_num + int(num2))
+    # e.insert(0, f_num + float(num2))
 
     if math == "multiply":
-        e.insert(0,f_num * int(num2))
+        e.insert(0,f_num * float(num2))
     elif math == "addition":
-        e.insert(0, f_num + int(num2))
+        ans = f_num + float(num2)
+        e.insert(0, float(ans))
     elif math == "divide":
-        e.insert(0, f_num / int(num2))
+        e.insert(0, f_num / float(num2))
     elif math == "subtract":
-        e.insert(0, f_num - int(num2))
+        e.insert(0, f_num - float(num2))
 
 def button_sqrt():
     num1 = e.get()
     e.delete(0, END)
-    num1 = int(num1)
-    num2 = math.sqrt(num1)
-    e.insert(0, str(num2))
+    num1 = float(num1)
+    num1 = math.sqrt(num1)
+    e.insert(0, str(num1))
 
+def button_mr():
+    # Recall the current memory register value
+    global memory
+    e.delete(0, END)
+    e.insert(0, str(memory))
+
+
+def button_mc():
+    # Memory clear, set value to 0
+    global memory
+    memory = "0"
+    e.insert(0, memory)
+
+
+
+def button_m_add():
+    # Add current value to mr
+    global memory
+    num1 = e.get()
+    memory = float(memory) + float(e.get())
+
+def button_m_sub():
+    # Subtract current value from mr
+    global memory
+    global memory
+    num1 = e.get()
+    memory = float(memory) - float(e.get())
 
 
 # Define Buttons
@@ -109,8 +136,19 @@ button_divide = Button(root, text="/", padx=29, pady=20,
                     command=button_divide)
 button_multiply = Button(root, text="*", padx=29, pady=20,
                     command=button_multiply)
-button_sqrt = Button(root, text="√", padx=25, pady=20,
+button_sqrt = Button(root, text="√", padx=24, pady=20,
                      command=button_sqrt)
+button_mr = Button(root, text="MR", padx=19, pady=20,
+                       command=button_mr)
+button_m_add = Button(root, text="M+", padx=20, pady=20,
+                      command=button_m_add)
+button_mc = Button(root, text="MC", padx=20, pady=20,
+                      command=button_mc)
+button_m_sub = Button(root, text="M-", padx=20, pady=20,
+                      command=button_m_sub)
+
+
+#button_percentage =
 
 
 # Put buttons on the screen
@@ -135,6 +173,10 @@ button_subtract.grid(row=2, column=3)
 button_multiply.grid(row=3, column=3)
 button_divide.grid(row=4, column=3)
 button_sqrt.grid(row=5, column=0)
+button_mr.grid(row=5, column=1)
+button_m_add.grid(row=5, column=2)
+button_mc.grid(row=5, column=3)
+button_m_sub.grid(row=6, column=0)
 
 
 root.mainloop()
