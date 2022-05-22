@@ -83,6 +83,7 @@ def button_mr():
 def button_mc():
     # Memory clear, set value to 0
     global memory
+    e.delete(0, END)
     memory = "0"
     e.insert(0, memory)
 
